@@ -1,0 +1,9 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",  // Set this to the root directory of your project
+    "paths": {
+      "@api/*": ["./api"]  // Add path aliases if necessary
+    }
+  }
+}

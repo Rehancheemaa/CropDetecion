@@ -1,0 +1,82 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+apply plugin: 'com.google.gms.google-services' // <- Add this line
+
+
+/**
+ * React Native Android app configuration
+ */
+react {
+    // Adjust the debug variants as needed
+    debuggableVariants = ["debug"]
+}
+
+android {
+    namespace "com.cropdetecion"
+
+    // SDK and build tool versions
+    compileSdk rootProject.ext.compileSdkVersion
+    ndkVersion rootProject.ext.ndkVersion
+
+    defaultConfig {
+        applicationId "com.cropdetecion"
+        minSdkVersion 24 // Updated to match library requirements
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        // Enable multiDex to support more methods
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.debug // Replace with your release signing config
+            minifyEnabled false // Keep Proguard disabled for now
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    // Packaging options to prevent duplicate classes
+    packagingOptions {
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
+    }
+}
+
+dependencies {
+    // React Native core dependencies
+    implementation("com.facebook.react:react-android")
+    implementation("com.facebook.react:flipper-integration")
+    implementation platform('com.google.firebase:firebase-bom:33.6.0')  // Ensure this is the latest version
+    implementation("com.google.firebase:firebase-analytics")
+    implementation 'com.google.firebase:firebase-auth'
+    // JavaScriptCore (JSC) engine or Hermes (depending on your setup)
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation("org.webkit:android-jsc:+")
+    }
+
+    // Additional dependencies (if required)
+    implementation 'androidx.multidex:multidex:2.0.1' // MultiDex support for large apps
+
+    // Example third-party dependencies
+    // implementation "com.squareup.okhttp3:okhttp:4.10.0" // Add as needed
+}
+
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); 
+applyNativeModulesAppBuildGradle(project)

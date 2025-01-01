@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "987418290765",
+    "project_id": "cropdetecion",
+    "storage_bucket": "cropdetecion.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987418290765:android:0d2072df9cd8240d7fca04",
+        "android_client_info": {
+          "package_name": "com.cropdetecion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgzsTKAPkrmU7APGY9L4sF8BVo2T_asi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
